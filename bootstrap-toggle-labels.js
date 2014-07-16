@@ -19,7 +19,7 @@
 
         $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
             var $this   = $(this),
-                oldText = $this.text();
+                oldText = $this.html();
 
             if (!$this.data('oldtext')) {
                 $this.data('oldtext', oldText);
@@ -30,11 +30,13 @@
             var labelExpanded   = $this.attr('data-label-expanded'),
                 labelContracted = $this.attr('data-label-contracted') || oldText;
 
-            // Hiding
-            if ( !$this.hasClass('collapsed') && labelExpanded ) {
-                $this.text(labelExpanded);
-            } else if ( $this.hasClass('collapsed') && labelContracted ) {
-                $this.text(labelContracted);
+            if (labelExpanded && labelContracted) {
+                // Hiding
+                if ( !$this.hasClass('collapsed') && labelExpanded ) {
+                    $this.html(labelExpanded);
+                } else if ( $this.hasClass('collapsed') && labelContracted ) {
+                    $this.html(labelContracted);
+                }
             }
         });
 
